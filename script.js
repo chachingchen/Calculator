@@ -1,6 +1,21 @@
+//additional functionality: 1.delete key 2.bracket 3.IOS style calculator
+
 const calculatorDisplay = document.querySelector('h1');
 const inputBtns = document.querySelectorAll('button');
 const clearBtn = document.getElementById('clear-btn');
+
+// calculate first and second values depending on operator
+const calculate = {
+	'/': (firstNumber, secondNumber) => firstNumber / secondNumber,
+	
+	'*': (firstNumber, secondNumber) => firstNumber * secondNumber,
+	
+	'+': (firstNumber, secondNumber) => firstNumber + secondNumber,
+	
+	'-': (firstNumber, secondNumber) => firstNumber - secondNumber,
+	
+	'=': (firstNumber, secondNumber) => secondNumber,
+};
 
 let firstValue = 0;
 let operatorValue = '';
@@ -27,19 +42,6 @@ function addDecimal() {
 	}
 }
 
-// calculate first and second values depending on operator
-const calculate = {
-	'/': (firstNumber, secondNumber) => firstNumber / secondNumber,
-	
-	'*': (firstNumber, secondNumber) => firstNumber * secondNumber,
-	
-	'+': (firstNumber, secondNumber) => firstNumber + secondNumber,
-	
-	'-': (firstNumber, secondNumber) => firstNumber - secondNumber,
-	
-	'=': (firstNumber, secondNumber) => secondNumber,
-}
-
 function useOperator(operator) {
 	const currentValue = Number(calculatorDisplay.textContent);
 	//prevent multiple operators
@@ -47,17 +49,26 @@ function useOperator(operator) {
 		operatorValue = operator;
 		return;
 	}
+	
 	// Assign first value if no value
 	if(!firstValue) {
 		firstValue = currentValue;
 	}else {
 		const calculation = calculate[operatorValue](firstValue, currentValue);
 		calculatorDisplay.textContent = calculation
-		firstValue = calculation;
+		firstValue = calculation; //in case calculation continue
 	}
 	//ready for next value, store operator
 	awaitingNextValue = true;
 	operatorValue = operator;
+}
+
+// Reset all values, display
+function resetAll() {
+	firstValue = 0;
+	operatorValue = '';
+	awaitingNextValue = false;
+	calculatorDisplay.textContent = '0';
 }
 
 // add Event Listeners for numbers,operators, decimal buttons
@@ -70,14 +81,6 @@ inputBtns.forEach((inputBtn) => {
   	inputBtn.addEventListener('click', () => addDecimal());
   }
 });
-
-// Reset all values, display
-function resetAll() {
-	firstValue = 0;
-	operatorValue = '';
-	awaitingNextValue = false;
-	calculatorDisplay.textContent = '0';
-}
 
 //Event Listener
 clearBtn.addEventListener('click', resetAll);
