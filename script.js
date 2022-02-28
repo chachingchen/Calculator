@@ -1,4 +1,4 @@
-//additional functionality: 1.delete key 2.bracket 3.IOS style calculator
+//additional functionality: 1.delete key 2.toggle switch to ios style
 
 const calculatorDisplay = document.querySelector('h1');
 const inputBtns = document.querySelectorAll('button');
