@@ -113,7 +113,8 @@ button:focus {
 .delete {
 	grid-column-start: 4;
 	grid-column-end: 5;
-	background: grey;
+	background: gray;
+	opacity: 0.4;
 	color: white;
 	font-size: 20px;
 }
@@ -156,14 +157,6 @@ button:focus {
   background-color: white;
   -webkit-transition: .4s;
   transition: .4s;
-}
-
-.slider:after {
-	/*position: fixed;*/
-	content: "IOS";
-	font-size: 2px;
-	right: 0;
-  bottom: 4px;
 }
 
 input:checked + .slider {
